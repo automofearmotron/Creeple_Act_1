@@ -5,7 +5,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends \"res://Scenes/weapons/projectile.gd\"
+script/source = "extends \"res://Scripts/weapons/projectile.gd\"
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -37,6 +37,8 @@ height = 120.154
 [node name="Knife" instance=ExtResource( 1 )]
 
 gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
 script = SubResource( 1 )
 _sections_unfolded = [ "Collision" ]
 
@@ -51,5 +53,6 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( -1, -1.5 )
 scale = Vector2( 0.0634921, 0.174687 )
 shape = SubResource( 3 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 
 

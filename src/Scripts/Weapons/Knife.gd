@@ -1,13 +1,10 @@
-extends "res://Scenes/weapons/projectile.gd"
-
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+extends "res://Scripts/weapons/projectile.gd"
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	pass
+	set_damage(1)
+	set_speed(500)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

@@ -3,11 +3,10 @@
 [ext_resource path="res://Scripts/Enemies/RigidBody2D.gd" type="Script" id=1]
 [ext_resource path="res://dodge_assets/dodge_assets/art/enemyFlyingAlt_1.png" type="Texture" id=2]
 [ext_resource path="res://dodge_assets/dodge_assets/art/enemyFlyingAlt_2.png" type="Texture" id=3]
-[ext_resource path="res://dodge_assets/dodge_assets/art/enemyWalking_1.png" type="Texture" id=4]
-[ext_resource path="res://dodge_assets/dodge_assets/art/enemyWalking_2.png" type="Texture" id=5]
-[ext_resource path="res://dodge_assets/dodge_assets/art/enemySwimming_1.png" type="Texture" id=6]
-[ext_resource path="res://dodge_assets/dodge_assets/art/enemySwimming_2.png" type="Texture" id=7]
-
+[ext_resource path="res://dodge_assets/dodge_assets/art/enemySwimming_1.png" type="Texture" id=4]
+[ext_resource path="res://dodge_assets/dodge_assets/art/enemySwimming_2.png" type="Texture" id=5]
+[ext_resource path="res://dodge_assets/dodge_assets/art/enemyWalking_1.png" type="Texture" id=6]
+[ext_resource path="res://dodge_assets/dodge_assets/art/enemyWalking_2.png" type="Texture" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -19,13 +18,13 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "walk",
-"speed": 4.0
+"name": "swim",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "swim",
-"speed": 5.0
+"name": "walk",
+"speed": 4.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -34,7 +33,7 @@ custom_solver_bias = 0.0
 radius = 10.0
 height = 20.0
 
-[node name="Mob" type="RigidBody2D"]
+[node name="Mob" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -46,8 +45,8 @@ bounce = 0.0
 gravity_scale = 0.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 2
+contact_monitor = true
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
@@ -55,7 +54,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Pause", "Pickable" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -80,6 +79,8 @@ _sections_unfolded = [ "Transform" ]
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="2"]
 
 rect = Rect2( -10, -10, 20, 20 )
+
+[connection signal="body_shape_entered" from="." to="." method="_on_Mob_body_shape_entered"]
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
