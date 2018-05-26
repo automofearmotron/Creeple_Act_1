@@ -34,5 +34,4 @@ func _on_StartButton_pressed():
 	emit_signal("start_game")
 	
 func _on_MessageTimer_timeout():
-	print('timeout')
 	$MessageLabel.hide()
