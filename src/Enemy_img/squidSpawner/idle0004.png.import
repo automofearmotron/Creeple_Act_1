@@ -7,10 +7,10 @@ path="res://.import/idle0004.png-9b744473cd0b76aacfc89bda9a5c3e0a.stex"
 [deps]
 
 source_file="res://Enemy_img/squidSpawner/idle0004.png"
-source_md5="073770a9a34f26bb0bf7c2e0e223041d"
+source_md5="5254dcf5bfffab5b0979efb7aa95aaa0"
 
 dest_files=[ "res://.import/idle0004.png-9b744473cd0b76aacfc89bda9a5c3e0a.stex" ]
-dest_md5="243886306d57414b1df19b4da8f4ca60"
+dest_md5="cf96bbc47e32332fc135741c6212388f"
 
 [params]
 

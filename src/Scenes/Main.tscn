@@ -65,7 +65,7 @@ lookahead = 4.0
 
 [node name="SquidSpawner" parent="." index="7" instance=ExtResource( 5 )]
 
-position = Vector2( 1421.42, 321.063 )
+position = Vector2( 1531.45, 254.74 )
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 

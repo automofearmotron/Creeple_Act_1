@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/swoosh_1.wav-51c1c36039acd5f81e112a17863354cc.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/Weapons/swoosh_1.wav"
+source_md5="d6fb3622432e183a46ce9ba0773ee4de"
+
+dest_files=[ "res://.import/swoosh_1.wav-51c1c36039acd5f81e112a17863354cc.sample" ]
+dest_md5="c684dba008b385221281678c2a5eca56"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

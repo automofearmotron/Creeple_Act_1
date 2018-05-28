@@ -9,6 +9,10 @@ var score
 
 func _ready():
 	randomize()
+	#var screen_size = OS.get_screen_size()
+	#var window_size = OS.get_window_size()
+	
+	#OS.set_window_position(screen_size - window_size)
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
