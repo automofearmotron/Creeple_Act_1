@@ -10,6 +10,8 @@ var maxBullets = 5
 var bulletsOnScreen = 0
 var canFire = true
 var fireDirection = 1
+var fireXOffset = 0
+var fireYOffset = 0
 
 # class member variables go here, for example:
 # var a = 2
@@ -53,6 +55,10 @@ func _process(delta):
 		fire()
 
 func _on_Player_body_entered(body):
+	if(body.get_name() == "TileMap"):
+		position.x = clamp(position.x, 0, screensize.x)
+		position.y = clamp(position.y, 0, screensize.y)
+		return
 	if(body.get_friendly()):
 		return
 	hide()
@@ -74,10 +80,13 @@ func fire():
 	if(bulletsOnScreen >= maxBullets || canFire == false):
 		return
 	var knife = Projectile.instance()
+	# Rotate knife according to the firing direction
 	var knifeRot = ROTATE_QUARTER * fireDirection
+	# Adjusting velocity to match rotation
 	var velRot = ROTATE_QUARTER * (fireDirection - 1)
 	get_owner().add_child(knife)
 	knife.position = position
+	#print($CollisionShape2D.get_shape().height)
 	knife.rotation = knifeRot
 	knife.set_linear_velocity(Vector2(knife.get_speed(), 0).rotated(velRot))
 	canFire = false

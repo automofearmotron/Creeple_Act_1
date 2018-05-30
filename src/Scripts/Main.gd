@@ -2,6 +2,7 @@ extends Node
 
 export (PackedScene) var Mob
 var score
+var currentSong
 
 # class member variables go here, for example:
 # var a = 2
@@ -9,6 +10,13 @@ var score
 
 func _ready():
 	randomize()
+	currentSong = AudioStreamPlayer.new()
+	var audioFile = "res://Audio/Music/wavs/Creeples_Sketch_1.wav"
+	var music = load(audioFile)
+	currentSong.stream = music
+	currentSong.play()
+	currentSong.volume_db = -15
+	add_child(currentSong)
 	#var screen_size = OS.get_screen_size()
 	#var window_size = OS.get_window_size()
 	
@@ -30,6 +38,12 @@ func new_game():
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	var audioFile = "res://Audio/Music/wavs/Creeples_Overworld.wav"
+	var music = load(audioFile)
+	currentSong.stream = music
+	currentSong.play()
+	currentSong.volume_db = -15
+	$Level_BG.show()
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()

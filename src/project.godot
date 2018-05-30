@@ -12,6 +12,7 @@ config_version=3
 
 config/name="Creeple"
 run/main_scene="res://Scenes/Main.tscn"
+boot_splash/image="res://Media/creeple_splash.png"
 config/icon="res://icon.png"
 
 [display]
@@ -24,4 +25,5 @@ window/stretch/aspect="keep_width"
 
 [rendering]
 
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"

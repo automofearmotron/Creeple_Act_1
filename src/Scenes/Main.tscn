@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player/Trompkist.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Overlays/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Enemies/squidSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Level_Backgrounds/Level_1/Level_1_begin.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -13,7 +14,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1921.26, 1.11136, 0, 0, 0, 0, 1916.71, 1078.07, 0, 0, 0, 0, 3.6315, 1078.07, 0, 0, 0, 0, 0, 0 )
 }
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
@@ -66,6 +67,13 @@ lookahead = 4.0
 [node name="SquidSpawner" parent="." index="7" instance=ExtResource( 5 )]
 
 position = Vector2( 1531.45, 254.74 )
+
+[node name="Level_BG" parent="." index="8" instance=ExtResource( 6 )]
+
+visible = false
+position = Vector2( 306.729, 224.935 )
+z_index = -1
+_sections_unfolded = [ "Z Index" ]
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 

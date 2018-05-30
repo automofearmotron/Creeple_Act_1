@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Creeples_Sketch_1.wav-38f3297e881f9a6214e715b6846545e8.sample"
+
+[deps]
+
+source_file="res://Audio/Music/wavs/Creeples_Sketch_1.wav"
+source_md5="a6d8d1c9d5b739d37c032a1ff022781c"
+
+dest_files=[ "res://.import/Creeples_Sketch_1.wav-38f3297e881f9a6214e715b6846545e8.sample" ]
+dest_md5="23012fd79f447266f7c1d7f946e907a9"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

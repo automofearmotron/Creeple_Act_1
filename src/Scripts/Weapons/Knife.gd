@@ -1,4 +1,4 @@
-extends "res://Scripts/weapons/projectile.gd"
+extends "res://Scripts/Weapons/projectile.gd"
 
 func _ready():
 	# Called every time the node is added to the scene.

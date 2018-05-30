@@ -33,6 +33,8 @@ func fireSalvo():
 	
 
 func _on_SquidSpawner_body_shape_entered(body_id, body, body_shape, local_shape):
+	if(body.get_name() == "TileMap"):
+		return
 	if(!body.get_friendly()):
 		return
 	var hitEffect = Blood.instance()

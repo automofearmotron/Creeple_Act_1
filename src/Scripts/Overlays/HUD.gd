@@ -25,6 +25,7 @@ func show_game_over():
 	$StartButton.show()
 	$MessageLabel.text = "Dodge the\nCreeps!"
 	$MessageLabel.show()
+	$ScoreLabel.show()
 	$ExitButton.show()
 	
 func update_score(score):
@@ -33,6 +34,7 @@ func update_score(score):
 func _on_StartButton_pressed():
 	$StartButton.hide()
 	$ExitButton.hide()
+	$OpeningCanvas.get_node("OpeningControl").hide()
 	emit_signal("start_game")
 	
 func _on_MessageTimer_timeout():

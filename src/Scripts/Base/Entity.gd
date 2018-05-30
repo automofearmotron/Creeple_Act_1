@@ -1,5 +1,10 @@
 extends RigidBody2D
 
+var MIN_SPEED = 100
+var MAX_SPEED = 300
+var current_health = 1
+var MAX_HEALTH = 1 
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here

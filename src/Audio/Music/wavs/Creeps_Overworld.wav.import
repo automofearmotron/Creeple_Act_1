@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Creeps_Overworld.wav-9b8e5f43d4288e828de277d6ed48b981.sample"
+
+[deps]
+
+source_file="res://Audio/Music/wavs/Creeps_Overworld.wav"
+source_md5="92a01a6a84d6893251bb1f96e1a9c0d0"
+
+dest_files=[ "res://.import/Creeps_Overworld.wav-9b8e5f43d4288e828de277d6ed48b981.sample" ]
+dest_md5="998ea7935890bfb16e23bceceafee748"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

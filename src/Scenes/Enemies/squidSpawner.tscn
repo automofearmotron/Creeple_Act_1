@@ -75,7 +75,7 @@ custom_solver_bias = 0.0
 radius = 21.5905
 height = 109.23
 
-[node name="SquidSpawner" type="RigidBody2D" index="0"]
+[node name="SquidSpawner" type="RigidBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -110,7 +110,7 @@ Projectile = ExtResource( 3 )
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 19
+frame = 34
 playing = true
 _sections_unfolded = [ "Transform" ]
 
