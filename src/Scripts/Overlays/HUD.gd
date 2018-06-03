@@ -22,19 +22,25 @@ func show_message(text):
 func show_game_over():
 	show_message("Game Over")
 	yield($MessageTimer, "timeout")
-	$StartButton.show()
-	$MessageLabel.text = "Dodge the\nCreeps!"
-	$MessageLabel.show()
+	#$StartButton.show()
+	find_node('StartButton').show()
+	find_node('ExitButton').show()
+	#$MessageLabel.text = "Dodge the\nCreeps!"
+	#$MessageLabel.show()
 	$ScoreLabel.show()
-	$ExitButton.show()
+	$MarginContainer.show()
+	#$ExitButton.show()
 	
 func update_score(score):
 	$ScoreLabel.text = str(score)
 	
 func _on_StartButton_pressed():
-	$StartButton.hide()
-	$ExitButton.hide()
+	find_node('StartButton').hide()
+	find_node('ExitButton').hide()
+	#$StartButton.hide()
+	#$ExitButton.hide()
 	$OpeningCanvas.get_node("OpeningControl").hide()
+	$MarginContainer.hide()
 	emit_signal("start_game")
 	
 func _on_MessageTimer_timeout():

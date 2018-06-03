@@ -10,7 +10,6 @@ export (PackedScene) var Blood
 func _ready():
 	$AnimatedSprite.animation = mob_types[randi() % mob_types.size()]
 
-
 func set_friendly(friendlyIn):
 	friendly = friendlyIn
 

@@ -19,6 +19,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -37,7 +38,7 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 position = Vector2( -2.70156, 1.34573 )
 scale = Vector2( 1.75343, 2.10318 )
 shape = SubResource( 1 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
 [node name="FireRangeTimer" type="Timer" parent="." index="2"]
 
@@ -53,7 +54,28 @@ wait_time = 0.25
 one_shot = false
 autostart = false
 
-[node name="Camera2D" type="Camera2D" parent="." index="4"]
+[node name="DodgeDetectTimer" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 0.25
+one_shot = true
+autostart = false
+
+[node name="DodgeDelayTimer" type="Timer" parent="." index="5"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="ActivelyDodgingTimer" type="Timer" parent="." index="6"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = true
+autostart = false
+
+[node name="Camera2D" type="Camera2D" parent="." index="7"]
 
 anchor_mode = 1
 rotating = false
@@ -84,5 +106,11 @@ _sections_unfolded = [ "Drag Margin", "Limit", "Offset", "Smoothing", "Transform
 [connection signal="timeout" from="FireRangeTimer" to="." method="addBullet"]
 
 [connection signal="timeout" from="FireSpeedTimer" to="." method="_on_FireSpeedTimer_timeout"]
+
+[connection signal="timeout" from="DodgeDetectTimer" to="." method="_on_DodgeDetectTimer_timeout"]
+
+[connection signal="timeout" from="DodgeDelayTimer" to="." method="_on_DodgeDelayTimer_timeout"]
+
+[connection signal="timeout" from="ActivelyDodgingTimer" to="." method="_on_ActivelyDodgingTimer_timeout"]
 
 

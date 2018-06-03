@@ -4,6 +4,8 @@ export (int) var MIN_SPEED
 export (int) var MAX_SPEED
 var friendly = 0
 var health = 2
+var experienceValue = 10
+
 export (PackedScene) var Blood
 
 func _ready():
@@ -20,18 +22,28 @@ func set_health(healthIn):
 	
 func get_health():
 	return health
+
+func get_experience():
+	return experienceValue
+	
+func set_experience(expIn):
+	experienceValue = expIn
 	
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
-#func _on_Mob_body_shape_entered(body_id, body, body_shape, local_shape):
-#	if(!body.get_friendly()):
-#		return
-#	var hitEffect = Blood.instance()
-#	#hitEffect.position = body.position
-#	add_child(hitEffect)
-#	if(health > 0):
-#		health -= body.get_damage()
-#	else:
-#		hide()
-#		$CollisionShape2D.disabled = true
+func _on_Mob_body_shape_entered(body_id, body, body_shape, local_shape):
+	if(body.get_name() == "TileMap"):
+		return
+	if(!body.get_friendly()):
+		return
+	var hitEffect = Blood.instance()
+	#hitEffect.position = body.position
+	add_child(hitEffect)
+	$AnimatedSprite.animation = "hit"
+	if(health > 0):
+		health -= body.get_damage()
+	else:
+		hide()
+		$CollisionShape2D.disabled = true
+		body.get_creator().add_experience(experienceValue)

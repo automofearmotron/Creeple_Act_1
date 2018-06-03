@@ -5,13 +5,30 @@ export (PackedScene) var Projectile
 signal hit
 export (int) var SPEED # how fast the player will move (pixels/sec)
 var ROTATE_QUARTER = 1.5708;
+
 var screensize #size of game window
+
 var maxBullets = 5
 var bulletsOnScreen = 0
 var canFire = true
+
+var invulnerable = false
+var dodgePause = false
+var dodging = false
+var dodgeDirection = 1
+var canDodge = true
+var lastVelocity
+
+var speedAffection = 1
+
 var fireDirection = 1
 var fireXOffset = 0
 var fireYOffset = 0
+var controlsMuted = 0
+
+var playerExperience = 0
+var playerLevel = 0
+var playerSkillPoints = 0
 
 # class member variables go here, for example:
 # var a = 2
@@ -22,42 +39,81 @@ func _ready():
 	hide()
 
 func _process(delta):
-	var velocity = Vector2() # the player's movement vector
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
-		fireDirection = 1
-	if Input.is_action_pressed("ui_left"):
-		velocity.x -= 1
-		fireDirection = 3
-	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1
-		fireDirection = 2
-	if Input.is_action_pressed("ui_up"):
-		velocity.y -= 1
-		fireDirection = 0
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * SPEED
-		$AnimatedSprite.play()
+	var velocity = Vector2() # the player's movement vector	
+	if(!dodging):
+		if Input.is_action_pressed("ui_right"):
+			velocity.x += 1
+			fireDirection = 1
+			processDodge()
+			$DodgeDetectTimer.start()			
+		if Input.is_action_pressed("ui_left"):
+			velocity.x -= 1
+			fireDirection = 3
+			processDodge()
+			$DodgeDetectTimer.start()
+		if Input.is_action_pressed("ui_down"):
+			velocity.y += 1
+			fireDirection = 2
+			processDodge()
+			$DodgeDetectTimer.start()
+		if Input.is_action_pressed("ui_up"):
+			velocity.y -= 1
+			fireDirection = 0
+			processDodge()
+			$DodgeDetectTimer.start()
+		if velocity.length() > 0:
+			velocity = velocity.normalized() * (SPEED * speedAffection)
+			$AnimatedSprite.play()
+		else:
+			dodgePause = true
+			$AnimatedSprite.stop()
+		dodgeDirection = fireDirection
+		position += velocity * delta
+		#position.x = clamp(position.x, 0, screensize.x)
+		#position.y = clamp(position.y, 0, screensize.y)
+		lastVelocity = velocity
+		if velocity.x != 0:
+			$AnimatedSprite.animation = "right"
+			$AnimatedSprite.flip_v = false
+			$AnimatedSprite.flip_h = velocity.x < 0
+		elif velocity.y != 0:
+			$AnimatedSprite.animation = "up"
+			#$AnimatedSprite.flip_v = velocity.y > 0
+		if Input.is_action_pressed("ui_select"):
+			fire()
 	else:
-		$AnimatedSprite.stop()
-		
-	position += velocity * delta
-	position.x = clamp(position.x, 0, screensize.x)
-	position.y = clamp(position.y, 0, screensize.y)
-	if velocity.x != 0:
-		$AnimatedSprite.animation = "right"
-		$AnimatedSprite.flip_v = false
-		$AnimatedSprite.flip_h = velocity.x < 0
-	elif velocity.y != 0:
-		$AnimatedSprite.animation = "up"
-		#$AnimatedSprite.flip_v = velocity.y > 0
-	if Input.is_action_pressed("ui_select"):
-		fire()
+		position += lastVelocity * delta
+		#position.x = clamp(position.x, 0, screensize.x)
+		#position.y = clamp(position.y, 0, screensize.y)
+		$AnimatedSprite.animation = "side_dodge"
+		$AnimatedSprite.play()
+
+func processDodge():
+	if(!dodgePause || !canDodge):
+		return
+	if(!$DodgeDetectTimer.is_stopped() && fireDirection == dodgeDirection):
+		dodging = true
+		canDodge = false
+		speedAffection = 2
+		$AnimatedSprite.animation = "side_dodge"
+		$AnimatedSprite.play()
+		$DodgeDetectTimer.stop()
+		$ActivelyDodgingTimer.start()
+		$DodgeDelayTimer.start()
+		if (lastVelocity.x != 0):
+			$AnimatedSprite.flip_v = false
+			$AnimatedSprite.flip_h = lastVelocity.x < 0
+	dodgePause = false
 
 func _on_Player_body_entered(body):
+	if(dodging):
+		return
 	if(body.get_name() == "TileMap"):
-		position.x = clamp(position.x, 0, screensize.x)
-		position.y = clamp(position.y, 0, screensize.y)
+		#position.x = clamp(position.x, 0, screensize.x)
+		#position.y = clamp(position.y, 0, screensize.y)
+		lastVelocity.x *= -.05
+		lastVelocity.y *= -.05
+		position += lastVelocity
 		return
 	if(body.get_friendly()):
 		return
@@ -74,7 +130,33 @@ func start(pos):
 func addBullet():
 	if(bulletsOnScreen > 0):
 		bulletsOnScreen -= 1
-	
+
+func set_experience(experience):
+	playerExperience = experience	
+
+func get_experience():
+	return playerExperience
+
+func add_experience(experience):
+	playerExperience += experience
+
+func set_player_level(Level):
+	playerLevel = Level	
+
+func get_player_level():
+	return playerLevel
+
+func add_player_level(Level):
+	playerLevel += Level
+
+func set_player_skill_points(SkillPoints):
+	playerSkillPoints = SkillPoints	
+
+func get_player_skill_points():
+	return playerSkillPoints
+
+func add_player_skill_points(SkillPoints):
+	playerSkillPoints += SkillPoints
 
 func fire():
 	if(bulletsOnScreen >= maxBullets || canFire == false):
@@ -88,6 +170,7 @@ func fire():
 	knife.position = position
 	#print($CollisionShape2D.get_shape().height)
 	knife.rotation = knifeRot
+	knife.set_creator(self)
 	knife.set_linear_velocity(Vector2(knife.get_speed(), 0).rotated(velRot))
 	canFire = false
 	$FireSpeedTimer.start()
@@ -95,3 +178,16 @@ func fire():
 
 func _on_FireSpeedTimer_timeout():
 	canFire = true
+
+
+func _on_DodgeDelayTimer_timeout():
+	canDodge = true
+
+func _on_DodgeDetectTimer_timeout():
+	dodgePause = false
+	
+func _on_ActivelyDodgingTimer_timeout():
+	dodgePause = false
+	dodging = false
+	speedAffection = 1
+	$AnimatedSprite.animation = "right"

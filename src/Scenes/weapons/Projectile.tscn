@@ -37,6 +37,8 @@ autostart = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
 [connection signal="timeout" from="DistanceTimer" to="." method="_on_DistanceTimer_timeout"]
 
 

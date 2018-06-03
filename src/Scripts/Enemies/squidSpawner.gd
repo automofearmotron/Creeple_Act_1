@@ -32,21 +32,6 @@ func fireSalvo():
 		rotater += PI/4
 	
 
-func _on_SquidSpawner_body_shape_entered(body_id, body, body_shape, local_shape):
-	if(body.get_name() == "TileMap"):
-		return
-	if(!body.get_friendly()):
-		return
-	var hitEffect = Blood.instance()
-	#hitEffect.position = body.position
-	add_child(hitEffect)
-	$AnimatedSprite.animation = "hit"
-	if(health > 0):
-		health -= body.get_damage()
-	else:
-		hide()
-		$CollisionShape2D.disabled = true
-
 func _on_StandardFireTimer_timeout():
 	var proj = Projectile.instance()
 	add_child(proj)
@@ -61,3 +46,7 @@ func _on_StandardFireTimer_timeout():
 
 func _on_SalvoTimer_timeout():
 	fireSalvo()
+
+
+func _on_Mob_body_shape_entered(body_id, body, body_shape, local_shape):
+	._on_Mob_body_shape_entered(body_id, body, body_shape, local_shape)

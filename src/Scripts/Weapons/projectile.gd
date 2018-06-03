@@ -3,6 +3,7 @@ extends RigidBody2D
 var base_damage = 1
 var speed = 1
 var friendly = 1
+var creator
 
 func _ready():
 	$DistanceTimer.start()
@@ -29,6 +30,13 @@ func set_friendly(friendlyIn):
 	
 func get_friendly():
 	return friendly
-
+	
+# Owners are the enemies/players that create projectiles
+func set_creator(creatorIn):
+	creator = creatorIn
+	
+func get_creator():
+	return creator
+	
 func _on_DistanceTimer_timeout():
 	queue_free()

@@ -11,7 +11,7 @@
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1921.26, 1.11136, 0, 0, 0, 0, 1916.71, 1078.07, 0, 0, 0, 0, 3.6315, 1078.07, 0, 0, 0, 0, 0, 0 )
+"points": PoolVector2Array( 0, 0, 0, 0, 230, 40, 0, 0, 0, 0, 1810, 40, 0, 0, 0, 0, 1820, 960, 0, 0, 0, 0, 120, 950, 0, 0, 0, 0, 100, 120 )
 }
 
 [node name="Main" type="Node" index="0"]
@@ -20,6 +20,8 @@ script = ExtResource( 1 )
 Mob = ExtResource( 2 )
 
 [node name="Player" parent="." index="0" instance=ExtResource( 3 )]
+
+_sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Pickable", "Transform", "Visibility", "Z Index" ]
 
 [node name="MobTimer" type="Timer" parent="." index="1"]
 
@@ -53,7 +55,7 @@ curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
 
-rotation = 0.000578454
+position = Vector2( 230, 40 )
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
