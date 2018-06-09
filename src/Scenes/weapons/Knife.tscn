@@ -67,4 +67,10 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
+[node name="ContactPoint" parent="." index="6"]
+
+position = Vector2( -0.993341, -21.6902 )
+scale = Vector2( 0.215859, 0.177511 )
+_sections_unfolded = [ "Transform" ]
+
 

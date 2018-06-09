@@ -48,3 +48,13 @@ func _on_MessageTimer_timeout():
 
 func _on_ExitButton_pressed():
 	get_tree().quit()
+
+func _input(event):
+	if event.is_action_pressed("Pause"): 
+		get_tree().paused = true
+		$PauseMenuContainer.show()
+
+
+func _on_ResumeButton_pressed():
+	get_tree().paused = false
+	$PauseMenuContainer.hide()

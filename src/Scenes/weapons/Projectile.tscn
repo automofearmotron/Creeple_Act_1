@@ -39,6 +39,8 @@ autostart = false
 
 _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
+[node name="ContactPoint" type="Position2D" parent="." index="3"]
+
 [connection signal="timeout" from="DistanceTimer" to="." method="_on_DistanceTimer_timeout"]
 
 

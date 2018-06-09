@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
-[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Enemies/Weenie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player/Trompkist.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Overlays/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Enemies/squidSpawner.tscn" type="PackedScene" id=5]
@@ -14,7 +14,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 230, 40, 0, 0, 0, 0, 1810, 40, 0, 0, 0, 0, 1820, 960, 0, 0, 0, 0, 120, 950, 0, 0, 0, 0, 100, 120 )
 }
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
@@ -26,8 +26,8 @@ _sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Pick
 [node name="MobTimer" type="Timer" parent="." index="1"]
 
 process_mode = 1
-wait_time = 0.5
-one_shot = false
+wait_time = 1.0
+one_shot = true
 autostart = false
 
 [node name="ScoreTimer" type="Timer" parent="." index="2"]

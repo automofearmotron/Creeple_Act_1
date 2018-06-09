@@ -38,5 +38,8 @@ func set_creator(creatorIn):
 func get_creator():
 	return creator
 	
+func get_contact_point():
+	return $ContactPoint.global_position
+	
 func _on_DistanceTimer_timeout():
 	queue_free()

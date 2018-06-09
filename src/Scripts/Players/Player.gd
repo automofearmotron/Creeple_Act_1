@@ -106,14 +106,14 @@ func processDodge():
 	dodgePause = false
 
 func _on_Player_body_entered(body):
-	if(dodging):
-		return
 	if(body.get_name() == "TileMap"):
 		#position.x = clamp(position.x, 0, screensize.x)
 		#position.y = clamp(position.y, 0, screensize.y)
 		lastVelocity.x *= -.05
 		lastVelocity.y *= -.05
 		position += lastVelocity
+		return
+	if(dodging):
 		return
 	if(body.get_friendly()):
 		return
