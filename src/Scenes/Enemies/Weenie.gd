@@ -1,6 +1,7 @@
 extends "res://Scripts/Enemies/baseEnemy.gd"
 
 func _ready():
+	health = 10
 	$AnimatedSprite.animation = 'idle'
 	$AnimatedSprite.play()
 	

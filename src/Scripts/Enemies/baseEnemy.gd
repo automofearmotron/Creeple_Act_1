@@ -2,8 +2,9 @@ extends KinematicBody2D
 
 export (int) var MIN_SPEED
 export (int) var MAX_SPEED
+export (int) var INIT_HEALTH
 var friendly = 0
-var health = 2
+var health = 1
 var experienceValue = 10
 var velocity = Vector2()
 
@@ -22,19 +23,20 @@ func _process(delta):
 		add_child(hitEffect)
 		hitEffect.global_position = body.get_contact_point()
 		$AnimatedSprite.animation = "hit"
+		$AnimatedSprite.play()
 		if(health > 0):
 			health -= body.get_damage()
 		else:
-			hide()
+			$AnimatedSprite.animation = 'death'
 			$CollisionShape2D.disabled = true
 			body.get_creator().add_experience(experienceValue)
-			queue_free()
 
 func _ready():
 	velocity.x = MIN_SPEED
 	velocity.y = MIN_SPEED
-	$AnimatedSprite.animation = "default"
-
+	$AnimatedSprite.animation = "idle"
+	$AnimatedSprite.play()
+	
 func set_friendly(friendlyIn):
 	friendly = friendlyIn
 
@@ -56,6 +58,18 @@ func set_experience(expIn):
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == 'hit':
+		$AnimatedSprite.animation = 'idle'
+	elif $AnimatedSprite.animation == 'death':
+		kill_self()
+
+func kill_self():
+	hide()
+	$CollisionShape2D.disabled = true
+	queue_free()
+	
 func _on_Mob_body_shape_entered(body_id, body, body_shape, local_shape):
 	if(body.get_name() == "TileMap"):
 		return
@@ -71,7 +85,5 @@ func _on_Mob_body_shape_entered(body_id, body, body_shape, local_shape):
 	if(health > 0):
 		health -= body.get_damage()
 	else:
-		hide()
-		$CollisionShape2D.disabled = true
 		body.get_creator().add_experience(experienceValue)
-		queue_free()
+		kill_self();

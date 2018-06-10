@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://Scripts/Enemies/squidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Particles/BaseParticle.tscn" type="PackedScene" id=2]
@@ -53,6 +53,32 @@
 [ext_resource path="res://Enemy_img/squidSpawner/hit/hit0053.png" type="Texture" id=51]
 [ext_resource path="res://Enemy_img/squidSpawner/hit/hit0054.png" type="Texture" id=52]
 [ext_resource path="res://Enemy_img/squidSpawner/hit/hit0055.png" type="Texture" id=53]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0055.png" type="Texture" id=54]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0056.png" type="Texture" id=55]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0057.png" type="Texture" id=56]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0058.png" type="Texture" id=57]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0059.png" type="Texture" id=58]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0060.png" type="Texture" id=59]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0061.png" type="Texture" id=60]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0062.png" type="Texture" id=61]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0063.png" type="Texture" id=62]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0064.png" type="Texture" id=63]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0065.png" type="Texture" id=64]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0066.png" type="Texture" id=65]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0067.png" type="Texture" id=66]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0068.png" type="Texture" id=67]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0069.png" type="Texture" id=68]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0070.png" type="Texture" id=69]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0071.png" type="Texture" id=70]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0072.png" type="Texture" id=71]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0073.png" type="Texture" id=72]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0074.png" type="Texture" id=73]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0075.png" type="Texture" id=74]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0076.png" type="Texture" id=75]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0077.png" type="Texture" id=76]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0078.png" type="Texture" id=77]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0079.png" type="Texture" id=78]
+[ext_resource path="res://Enemy_img/squidSpawner/death/death0080.png" type="Texture" id=79]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -66,6 +92,11 @@ animations = [ {
 "loop": true,
 "name": "hit",
 "speed": 29.0
+}, {
+"frames": [ ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 59 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 66 ), ExtResource( 67 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 73 ), ExtResource( 74 ), ExtResource( 75 ), ExtResource( 76 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 79 ) ],
+"loop": true,
+"name": "death",
+"speed": 100.0
 } ]
 _sections_unfolded = [ "Resource" ]
 
@@ -75,7 +106,7 @@ custom_solver_bias = 0.0
 radius = 21.5905
 height = 109.23
 
-[node name="Mob" type="KinematicBody2D" index="0"]
+[node name="Mob" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -85,6 +116,7 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 MIN_SPEED = 1
 MAX_SPEED = 25
+INIT_HEALTH = null
 Blood = ExtResource( 2 )
 Projectile = ExtResource( 3 )
 
@@ -93,8 +125,7 @@ Projectile = ExtResource( 3 )
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 16
-playing = true
+frame = 20
 _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
@@ -116,6 +147,8 @@ process_mode = 1
 wait_time = 5.0
 one_shot = false
 autostart = false
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 
 [connection signal="timeout" from="StandardFireTimer" to="." method="_on_StandardFireTimer_timeout"]
 

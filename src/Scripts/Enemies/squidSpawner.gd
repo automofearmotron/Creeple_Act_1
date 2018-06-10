@@ -27,7 +27,6 @@ func fireSalvo():
 		# add some randomness to the direction
 		proj.rotation = rotater + PI/2
 		# choose the velocity
-		$AnimatedSprite.animation = "idle"
 		proj.set_linear_velocity(Vector2(rand_range(proj.get_speed(), proj.get_speed()), 0).rotated(rotater))
 		rotater += PI/4
 	
@@ -40,13 +39,20 @@ func _on_StandardFireTimer_timeout():
 	direction += rand_range(-PI/8, PI/8)
 	proj.rotation = direction + PI/2
 	# choose the velocity
-	$AnimatedSprite.animation = "idle"
 	proj.set_linear_velocity(Vector2(rand_range(proj.get_speed(), proj.get_speed()), 0).rotated(direction))
 
 
 func _on_SalvoTimer_timeout():
 	fireSalvo()
 
+func kill_self():
+	.kill_self()
+	$StandardFireTimer.stop()
+	$SalvoTimer.stop()
 
 func _on_Mob_body_shape_entered(body_id, body, body_shape, local_shape):
 	._on_Mob_body_shape_entered(body_id, body, body_shape, local_shape)
+
+
+func _on_AnimatedSprite_animation_finished():
+	._on_AnimatedSprite_animation_finished()
