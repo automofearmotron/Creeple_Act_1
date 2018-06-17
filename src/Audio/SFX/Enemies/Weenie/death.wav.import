@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/death.wav-6b45de457b97c18f09634e5940e43997.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/Enemies/Weenie/death.wav"
+source_md5="691aace0347f6085365f692f11e961c8"
+
+dest_files=[ "res://.import/death.wav-6b45de457b97c18f09634e5940e43997.sample" ]
+dest_md5="a6f81bf70d8cb7de30d0eb7ad842efba"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

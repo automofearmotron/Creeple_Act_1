@@ -1,0 +1,128 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Events/Levelup/levelup_base.gd" type="Script" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+
+render_priority = 0
+
+[sub_resource type="ParticlesMaterial" id=2]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 1.06
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 180.0
+flatness = 0.0
+gravity = Vector3( 0, -30, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 25.0
+linear_accel_random = 0.0
+radial_accel = 0.5
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 25.0
+angle_random = 0.0
+scale = 3.0
+scale_random = 0.0
+color = Color( 1, 1, 1, 1 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angle", "Angular Velocity", "Color", "Emission Shape", "Flags", "Gravity", "Hue Variation", "Initial Velocity", "Linear Accel", "Orbit Velocity", "Radial Accel", "Scale", "Spread", "Trail" ]
+
+[sub_resource type="DynamicFontData" id=3]
+
+font_path = "res://Fonts/RuachLETPlain.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+
+size = 150
+use_mipmaps = false
+use_filter = false
+font_data = SubResource( 3 )
+_sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
+
+[node name="container" type="Node2D"]
+
+position = Vector2( -63.2486, 8.32539 )
+scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Particles2D" type="Particles2D" parent="." index="0"]
+
+material = SubResource( 1 )
+position = Vector2( 277.25, 118.583 )
+emitting = true
+amount = 600
+lifetime = 5.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 4.0
+explosiveness = 0.0
+randomness = 1.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 2 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Time", "Transform", "Visibility" ]
+
+[node name="Label" type="Label" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 2.0
+margin_right = 554.0
+margin_bottom = 177.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+text = "Level Up!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Size Flags", "custom_colors", "custom_fonts" ]
+
+[node name="DestructTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="DestructTimer" to="." method="_on_DestructTimer_timeout"]
+
+

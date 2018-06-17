@@ -1,6 +1,7 @@
 extends Area2D
 
 export (PackedScene) var Projectile
+export (PackedScene) var Levelup
 
 signal hit
 export (int) var SPEED # how fast the player will move (pixels/sec)
@@ -29,10 +30,12 @@ var controlsMuted = 0
 var playerExperience = 0
 var playerLevel = 0
 var playerSkillPoints = 0
+var levelCaps = [20,200,400,800,1600,3200,4400, 6000]
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var damageAmplifier = 0
+var criticalStrike = 0
+var pushForce = 0
+var defense = 0
 
 func _ready():
 	screensize = get_viewport_rect().size
@@ -107,8 +110,6 @@ func processDodge():
 
 func _on_Player_body_entered(body):
 	if(body.get_name() == "TileMap"):
-		#position.x = clamp(position.x, 0, screensize.x)
-		#position.y = clamp(position.y, 0, screensize.y)
 		lastVelocity.x *= -.05
 		lastVelocity.y *= -.05
 		position += lastVelocity
@@ -139,23 +140,28 @@ func get_experience():
 
 func add_experience(experience):
 	playerExperience += experience
+	if(levelCaps[playerLevel] < playerExperience):
+		playerLevel += 1
+		playerSkillPoints += 1
+		var levelAnim = Levelup.instance()
+		add_child(levelAnim)
 
-func set_player_level(Level):
-	playerLevel = Level	
+func set_level(Level):
+	playerLevel = Level
 
-func get_player_level():
+func get_level():
 	return playerLevel
 
-func add_player_level(Level):
+func add_level(Level):
 	playerLevel += Level
 
-func set_player_skill_points(SkillPoints):
+func set_skill_points(SkillPoints):
 	playerSkillPoints = SkillPoints	
 
-func get_player_skill_points():
+func get_skill_points():
 	return playerSkillPoints
 
-func add_player_skill_points(SkillPoints):
+func add_skill_points(SkillPoints):
 	playerSkillPoints += SkillPoints
 
 func fire():

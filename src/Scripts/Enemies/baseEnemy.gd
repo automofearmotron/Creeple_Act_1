@@ -29,7 +29,9 @@ func _process(delta):
 		else:
 			$AnimatedSprite.animation = 'death'
 			$CollisionShape2D.disabled = true
+			$DeathNote.play()
 			body.get_creator().add_experience(experienceValue)
+			print(body.get_creator().get_experience())
 
 func _ready():
 	velocity.x = MIN_SPEED
